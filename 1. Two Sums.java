@@ -9,6 +9,6 @@ class Solution {
             hashMap.put(nums[i], i);
         }
         
-        throw new IllegalArgumentException("no match found");
+        throw new IllegalArgumentException("Error to match return type");
     }
 }
