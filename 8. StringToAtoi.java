@@ -24,7 +24,7 @@ class Solution {
         if (i>= str.length) return 0;
         int num=0;
         while(i<str.length && (str[i]>='0' && str[i]<='9')){
-             if (num > Integer.MAX_VALUE / 10 || (num==Integer.MAX_VALUE/10 && str[i]-'0'                                    >Integer.MAX_VALUE % 10)) return sign==1?Integer.MAX_VALUE:Integer.MIN_VALUE;
+             if (num > Integer.MAX_VALUE / 10 || (num==Integer.MAX_VALUE/10 && str[i]-'0' > Integer.MAX_VALUE%10) return 0;                                    >Integer.MAX_VALUE % 10)) return sign==1?Integer.MAX_VALUE:Integer.MIN_VALUE;
             num = num*10+ Character.getNumericValue(str[i]);
             i++;
         } 
