@@ -28,7 +28,6 @@ class Solution {
             num = num*10+ Character.getNumericValue(str[i]);
             i++;
         } 
-            
         
         return num*sign;
     }
