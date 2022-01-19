@@ -21,7 +21,7 @@ class Solution {
                 }
             }
             
-            if (flag= false) matrix[i][0] = 0;
+            if (flag== false) matrix[i][0] = 0;
         }
     }
 }
