@@ -14,23 +14,21 @@
  * }
  */
 class Solution {
-    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-        List<List<Integer>> result = new ArrayList();
-        helper(root, targetSum, new ArrayList(), result);
-        return result;
-    }
-    public void helper(TreeNode root, int targetSum, List<Integer> current, List<List<Integer>> result){
-        if(root==null) return;
+    public void flatten(TreeNode root) {
+        if (root == null) return;
         
-        current.add(root.val);
-        if (targetSum-root.val==0 && root.left==null && root.right==null){
-        
-            result.add(current);
-            return;
+        TreeNode curr = root;
+        while (curr!=null){
+            if (curr.left!=null){
+                TreeNode prev= curr.left;
+                while(prev.right!=null){
+                    prev = prev.right;
+                }
+                prev.right = curr.right;
+                curr.right = curr.left;
+                curr.left = null;
+            }
+            curr = curr.right;
         }
-        
-        helper(root.left, targetSum-root.val, new ArrayList(current), result);
-        helper(root.right, targetSum-root.val, new ArrayList(current), result);
-        
     }
 }
