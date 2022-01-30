@@ -25,14 +25,23 @@ class Solution {
     public Node connect(Node root) {
         if (root == null) return null;
         Node curr = root;
-        while(curr.left!=null){
-            Node temp = curr;
-            while(curr!=null){
-                curr.left.next = curr.right;
-                curr.right.next = curr.next == null? null: curr.next.left;
+        while (curr!=null){
+            Node dummy = new Node(0);
+            Node temp = dummy;
+            
+            while (curr!=null){
+                if (curr.left == null){
+                    curr=curr.next;
+                     continue;
+                }
+                
+                temp.next = curr.left;
+                temp = temp.next;
+                temp.next = curr.right;
+                temp = temp.next;
                 curr = curr.next;
             }
-            curr = temp.left;
+            curr = dummy.next;
         }
         
         return root;
