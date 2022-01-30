@@ -20,7 +20,7 @@ class Solution {
         TreeNode current  = root;
         
         while(current !=null || !stack.isEmpty()){
-            while(current !=null){
+            while(current != null){
                 stack.push(current);
                 current=current.left;
             }
@@ -32,3 +32,4 @@ class Solution {
         return output;
     }
 }
+ bc
