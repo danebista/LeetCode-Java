@@ -1,43 +1,43 @@
 class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        HashSet<String> set = new HashSet();
-        
-        for (String word: wordList){
-            set.add(word);
-        }
-        
-        if (!set.contains(endWord)) return 0;
+        HashSet<String> words = new HashSet<>(wordList);
         
         Queue<String> queue = new LinkedList();
-        queue.offer(beginWord);
-        int level=1;
-        
-        while (!queue.isEmpty()){
+        queue.add(beginWord);
+        int level = 0;
+        while(!queue.isEmpty()){
             int size = queue.size();
-            for (int i=0; i< size;i++){
-                String current_word = queue.poll();
-                char[] word_chars = current_word.toCharArray();
-                
-                for (int j=0; j< word_chars.length;j++){
-                    char original_char = word_chars[j];
-                    for (char c='a'; c<='z'; c++){
-                        if (c== word_chars[j]) continue;
-                        word_chars[j] = c;
-                        String new_word = String.valueOf(word_chars);
-                        if (new_word.equals(endWord)) return level+1;
-                        
-                        if (set.contains(new_word)){
-                           queue.offer(new_word);
-                           set.remove(new_word);
-                            
-                        }
-                    }
-                    word_chars[j] = original_char;
+            for (int i=0; i< size; i++){
+                String curr = queue.remove();
+                if (curr.equals(endWord)) return level+1;
+                List<String> neighbors = findNeighbors(curr, words);
+
+                for (String neighbor: neighbors){
+                    queue.add(neighbor);
                 }
             }
             level++;
         }
-        
         return 0;
+    }
+    
+    public List<String> findNeighbors(String current, HashSet<String> words){
+        char[] array = current.toCharArray();
+        List<String> neighbors = new ArrayList();
+        for (int i=0; i<array.length; i++){
+            char temp = array[i];
+            for (char c='a'; c<='z'; c++){
+                if (c==temp) continue;
+                array[i] = c;
+                String newString = String.valueOf(array);
+                if (words.contains(newString)){
+                    neighbors.add(newString);
+                    words.remove(newString);
+                }
+            }
+            array[i] = temp;
+        }
+        
+        return neighbors;
     }
 }
