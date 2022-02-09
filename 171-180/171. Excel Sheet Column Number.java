@@ -9,6 +9,7 @@ class Solution {
             count+=1;
         }
         
+        // Method 2;
         for (char c:columTitle){
             int offset = (int)(c-'A'+1);
             method2 = method2 *26+offset;
