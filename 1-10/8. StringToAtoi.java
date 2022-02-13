@@ -1,34 +1,36 @@
 class Solution {
     public int myAtoi(String s) {
-        char[] charArray = s.toCharArray();
-      
-        return convertStringToAtoi(charArray);
+        int index = 0;
         
+        while(index < s.length() && s.charAt(index)==' '){
+            index++;
+        }
+        
+        if (index>= s.length()) return 0;
+        int sign = 1;
+        if (s.charAt(index)== '+' || s.charAt(index) == '-'){
+            if (s.charAt(index)=='-'){
+                sign =-1;
+            }
+            index++;
+        }
+        
+        if (index >=s.length()) return 0;
+        int value = 0;
+        
+        while (index<s.length() && (s.charAt(index)>='0' && s.charAt(index)<='9')){
+            if(value>Integer.MAX_VALUE/10 ||
+              (value==Integer.MAX_VALUE/10 && s.charAt(index)-'0' > Integer.MAX_VALUE%10)) {
+                if (sign==-1){
+                    return Integer.MIN_VALUE;
+                }
+                
+                return Integer.MAX_VALUE;
+            } 
+            value = value *10 + s.charAt(index)-'0';
+            index++;
     }
-    
-    public int convertStringToAtoi(char[] str){
-        int i = 0;
-        while(i< str.length && str[i] ==' '){
-            i++;
-            
-        }
-        int sign=1;
-        if( i< str.length && str[i]=='+'){
-            i++;
-        }
-        else if (i< str.length && str[i] == '-'){
-            sign = -1;
-            i++;
-        }
+        return value * sign;
         
-        if (i>= str.length) return 0;
-        int num=0;
-        while(i<str.length && (str[i]>='0' && str[i]<='9')){
-             if (num > Integer.MAX_VALUE / 10 || (num==Integer.MAX_VALUE/10 && str[i]-'0' > Integer.MAX_VALUE%10) return 0;                                    >Integer.MAX_VALUE % 10)) return sign==1?Integer.MAX_VALUE:Integer.MIN_VALUE;
-            num = num*10+ Character.getNumericValue(str[i]);
-            i++;
-        } 
-        
-        return num*sign;
     }
 }
