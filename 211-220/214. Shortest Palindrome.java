@@ -7,7 +7,7 @@ class Solution {
         int[] p = new int[l.length()];
         
         for (int i=1; i<l.length();i++){
-            // start index for prefix
+            // ends index for prefix
             int j = p[i-1];
             // move prefix to last equal poin
             while (j>0 && l.charAt(i) != l.charAt(j)){
